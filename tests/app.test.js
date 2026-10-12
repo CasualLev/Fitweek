@@ -8,4 +8,9 @@ describe('app', () => {
     expect(res.status).toBe(200);
     expect(res.text).toContain('FitWeek');
   });
+
+    it('serves the shared plan module to the browser', async () => {
+    const res = await request(createApp()).get('/src/plan.js');
+    expect(res.status).toBe(200);
+  });
 });
