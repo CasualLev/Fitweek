@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getWeek, getTodayName } from '../src/plan.js';
+import { getWeek, getTodayName, formatVolume, formatRest } from '../src/plan.js';
 
 describe('getWeek', () => {
   const week = getWeek();
@@ -35,4 +35,29 @@ describe('getTodayName', () => {
     expect(getTodayName(new Date(2026, 9, 12))).toBe('Monday');
     expect(getTodayName(new Date(2026, 9, 11))).toBe('Sunday');
   });
+
+  describe('exercise details', () => {
+  it('formats reps-based exercises', () => {
+    expect(formatVolume({ sets: 3, reps: 10 })).toBe('3 × 10 reps');
+  });
+
+  it('formats timed exercises in seconds', () => {
+    expect(formatVolume({ sets: 3, seconds: 30 })).toBe('3 × 30s');
+  });
+
+  it('formats rest time', () => {
+    expect(formatRest(60)).toBe('Rest 60s');
+    expect(formatRest(0)).toBe('No rest');
+  });
+
+  it('gives every exercise sets, rest and a tip', () => {
+    for (const d of getWeek()) {
+      for (const ex of d.exercises) {
+        expect(ex.sets).toBeGreaterThan(0);
+        expect(ex.rest).toBeGreaterThanOrEqual(0);
+        expect(ex.tip.length).toBeGreaterThan(0);
+      }
+    }
+  });
+});
 });

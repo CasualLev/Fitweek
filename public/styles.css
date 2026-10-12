@@ -63,3 +63,7 @@ body {
   border-radius: 999px;
   vertical-align: middle;
 }
+
+.ex-name { display: block; font-weight: 600; }
+.ex-meta { display: block; font-size: 0.85rem; color: var(--accent); }
+.ex-tip { display: block; font-size: 0.8rem; color: var(--muted); }

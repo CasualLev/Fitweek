@@ -52,3 +52,11 @@ export function getTodayName(date = new Date()) {
   // getDay() returns 0 for Sunday, so shift to make Monday index 0
   return DAYS[(date.getDay() + 6) % 7];
 }
+
+export function formatVolume(ex) {
+  return ex.seconds ? `${ex.sets} × ${ex.seconds}s` : `${ex.sets} × ${ex.reps} reps`;
+}
+
+export function formatRest(seconds) {
+  return seconds > 0 ? `Rest ${seconds}s` : 'No rest';
+}
